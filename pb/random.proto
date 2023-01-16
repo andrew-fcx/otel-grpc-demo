@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package randomNumberGenerator;
+
+message RandNum {
+    int32 num = 1;
+}
+
+message MinMax {
+    int32 minimum = 1;
+    int32 maximum = 2;
+}
+
+service RandNumGen {
+    rpc getNum(MinMax) returns (RandNum) {}
+}
