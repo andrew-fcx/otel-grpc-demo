@@ -1,6 +1,8 @@
 # otel-grpc-demo
 
-### Run Jaeger, Prometheus, and the OTel collector
+Repo to explore the use of gRPC/protocol buffers and OpenTelemetry
+
+### Run Jaeger <!-- , Prometheus, and the OTel collector -->
 
 For running Jaeger in docker run:
 
@@ -42,7 +44,7 @@ docker run -d --name otelcollector \
   --config=/etc/otel-collector-config.yaml
 ``` -->
 
-### Run server (service1)
+### Run server (grpc-server-node)
 
 To run, first install and run the gRPC server.
 
@@ -52,7 +54,7 @@ npm i
 npm start
 ```
 
-### Run client (service2)
+### Run client (grpc-client-py)
 
 Next install and run the gRPC client.
 
@@ -62,7 +64,7 @@ pip install -r requirements.txt
 opentelemetry-instrument --service_name grpc-client-py python app.py
 ```
 
-The protobuffer file is already compiled but can be recompiled with
+The protocol buffer file is already compiled but can be recompiled with
 
 ```
 python -m grpc_tools.protoc -I../pb --python_out=. --pyi_out=. --grpc_python_out=. ../pb/random.proto
