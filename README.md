@@ -83,3 +83,14 @@ If you want to change the bounds of the random number generation or change how o
 ```
 opentelemetry-instrument --service_name grpc-client-py python app.py --min=10 --max=20 --sleep=5
 ```
+
+
+## Resources
+
+- [gRPC Python basics](https://grpc.io/docs/languages/python/basics/)
+- [gRPC Node.js basics](https://grpc.io/docs/languages/node/basics/)
+- [OpenTelemetry Python getting started](https://opentelemetry.io/docs/instrumentation/python/getting-started/)
+- [OpenTelemetry Node.js getting started](https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/)
+- [Logz.io Node auto-instrumentation tutorial](https://logz.io/blog/nodejs-javascript-opentelemetry-auto-instrumentation/)
+- [Jaeger getting started](https://www.jaegertracing.io/docs/1.41/getting-started/)
+- 
