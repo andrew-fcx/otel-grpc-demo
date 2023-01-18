@@ -87,6 +87,7 @@ opentelemetry-instrument --service_name grpc-client-py python app.py --min=10 --
 
 ## Resources
 
+- [What is OpenTelemetry - Lightstep](https://www.youtube.com/watch?v=mUA-uzk94ro)
 - [gRPC Python basics](https://grpc.io/docs/languages/python/basics/)
 - [gRPC Node.js basics](https://grpc.io/docs/languages/node/basics/)
 - [OpenTelemetry Python getting started](https://opentelemetry.io/docs/instrumentation/python/getting-started/)
