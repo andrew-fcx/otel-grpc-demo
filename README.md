@@ -46,7 +46,7 @@ docker run -d --name otelcollector \
 
 The Jaeger all-in-one binary contains everything we need to collect metrics, including the OTLP collector for the OpenTelemetry traces. We could alternatively use the OpenTelemetry collector and then publish from there to Jaeger.
 
-### Run server (grpc-server-node)
+### Run server (`grpc-server-node`)
 
 To run, first install and run the gRPC server.
 
@@ -58,7 +58,7 @@ npm start
 
 The `npm start` command is running `node --require ./tracing.js app.js`. All the auto instrumentation for OpenTelemetry is implemented in a separate `tracing.js` file. manual instrumentation can also be done in the app by requiring the `opentelemetry` module and adding custom traces/metrics/logs.
 
-### Run client (grpc-client-py)
+### Run client (`grpc-client-py`)
 
 Next install and run the gRPC client.
 
@@ -93,4 +93,3 @@ opentelemetry-instrument --service_name grpc-client-py python app.py --min=10 --
 - [OpenTelemetry Node.js getting started](https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/)
 - [Logz.io Node auto-instrumentation tutorial](https://logz.io/blog/nodejs-javascript-opentelemetry-auto-instrumentation/)
 - [Jaeger getting started](https://www.jaegertracing.io/docs/1.41/getting-started/)
-- 
