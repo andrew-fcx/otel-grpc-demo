@@ -2,11 +2,13 @@
 
 Repo to explore the use of gRPC/protocol buffers and OpenTelemetry
 
+## Running the demo
+
 ### Run Jaeger <!-- , Prometheus, and the OTel collector -->
 
 For running Jaeger in docker run:
 
-```
+<!-- ```
 docker run -d --name jaeger \
   -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
   -e COLLECTOR_OTLP_ENABLED=true \
@@ -24,7 +26,9 @@ docker run -d --name jaeger \
   jaegertracing/all-in-one:1.41
 ```
 
-<!-- ```
+The Jaeger all-in-one binary contains everything we need to collect metrics, including the OTLP collector for the OpenTelemetry traces. We could alternatively use the OpenTelemetry collector and then publish from there to Jaeger. -->
+
+```
 docker run -d --name jaeger \
   -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
   -e COLLECTOR_OTLP_ENABLED=true \
@@ -34,17 +38,18 @@ docker run -d --name jaeger \
   jaegertracing/all-in-one:1.41
 ```
 
-Next, run the OTel collector:
+Next, run the OpenTelemetry collector:
 
 ```
 docker run -d --name otelcollector \
   -p 4317:4317 \
+  -p 4318:4318 \
+  -p 13133:13133 \
+  -p 55679:55679 \
   -v $(pwd)/otel-collector-config.yaml:/etc/otel-collector-config.yaml \
   otel/opentelemetry-collector:latest \
   --config=/etc/otel-collector-config.yaml
-``` -->
-
-The Jaeger all-in-one binary contains everything we need to collect metrics, including the OTLP collector for the OpenTelemetry traces. We could alternatively use the OpenTelemetry collector and then publish from there to Jaeger.
+```
 
 ### Run server (`grpc-server-node`)
 
@@ -84,6 +89,8 @@ If you want to change the bounds of the random number generation or change how o
 opentelemetry-instrument --service_name grpc-client-py python app.py --min=10 --max=20 --sleep=5
 ```
 
+If you want to export metrics and traces to the console instead you cane use the `--traces_exporter console` and `--metrics_exporter console` flags/values.
+
 
 ## Resources
 
@@ -94,3 +101,13 @@ opentelemetry-instrument --service_name grpc-client-py python app.py --min=10 --
 - [OpenTelemetry Node.js getting started](https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/)
 - [Logz.io Node auto-instrumentation tutorial](https://logz.io/blog/nodejs-javascript-opentelemetry-auto-instrumentation/)
 - [Jaeger getting started](https://www.jaegertracing.io/docs/1.41/getting-started/)
+
+
+## Next steps
+
+- Deeper dive into understanding of auto instrumentation. What is in scope?
+- Node.js auto instrumentation. How to instrument auto for all required libraries. e.g. SQL, HTTP, Redis, Kafka, etc.
+- Addition session reviewing prototype of collector
+- Example of custom and auto instrumentation of metrics. What is scope of auto instrumentation?
+- Example of custom and system var/log type auto instrumentation
+- Assure we can run auto instrumentation on the Greengrass

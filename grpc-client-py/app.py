@@ -5,9 +5,17 @@ import time
 import argparse
 
 from opentelemetry import trace
+from opentelemetry import metrics
 
 
 tracer = trace.get_tracer(__name__)
+meter = metrics.get_meter(__name__)
+
+
+random_counter = meter.create_counter(
+    "random_counter",
+    description="Number of random values generated",
+)
 
 
 def get_random_number(stub, minimum, maximum):
@@ -39,6 +47,7 @@ def run(min=1, max=100, sleep_time=1):
 
         while True:
             r = get_random_number(stub, min, max)
+            random_counter.add(1)
             time.sleep(sleep_time)
 
 
