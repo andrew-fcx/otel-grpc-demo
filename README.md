@@ -44,6 +44,7 @@ Next, run the OpenTelemetry collector:
 docker run -d --name otelcollector \
   -p 4317:4317 \
   -p 4318:4318 \
+  -p 8888:8888 \
   -p 13133:13133 \
   -p 55679:55679 \
   -v $(pwd)/otel-collector-config.yaml:/etc/otel-collector-config.yaml \
