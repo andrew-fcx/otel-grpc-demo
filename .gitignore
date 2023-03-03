@@ -4,3 +4,4 @@ node_modules/
 # Service 2 (Python ignores)
 __pycache__/
 .python-version
+prometheus-*/
