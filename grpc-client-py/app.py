@@ -7,14 +7,16 @@ import argparse
 from opentelemetry import trace
 from opentelemetry import metrics
 
+from logger import logger
+
 
 tracer = trace.get_tracer(__name__)
 meter = metrics.get_meter(__name__)
 
 
 random_counter = meter.create_counter(
-    "random_counter",
-    description="Number of random values generated",
+    "received_random_numbers_count",
+    description="Number of random values received",
 )
 
 
@@ -27,7 +29,7 @@ def get_random_number(stub, minimum, maximum):
         res = stub.getNum(min_max)
         n = res.num
         
-        print("Random number was:", n)
+        logger.info(f"Random number was: {n}")
     
     return n
 

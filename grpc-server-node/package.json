@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node --require ./tracing.js app.js",
-    "dev": "nodemon --require ./tracing.js app.js",
+    "start": "node --require ./tracing.js --require ./instrumentation.js app.js",
+    "dev": "nodemon --require ./tracing.js --require ./instrumentation.js app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -18,8 +18,10 @@
     "@grpc/proto-loader": "^0.7.4",
     "@opentelemetry/api": "^1.4.0",
     "@opentelemetry/auto-instrumentations-node": "^0.36.0",
+    "@opentelemetry/exporter-metrics-otlp-proto": "^0.35.1",
     "@opentelemetry/instrumentation": "^0.35.0",
     "@opentelemetry/resources": "^1.9.0",
+    "@opentelemetry/sdk-metrics": "^1.9.1",
     "@opentelemetry/sdk-node": "^0.35.0",
     "@opentelemetry/sdk-trace-node": "^1.9.0",
     "@opentelemetry/semantic-conventions": "^1.9.0"

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otelcollector
+spec:
+  selector:
+    matchLabels:
+      app: otelcollector
+  template:
+    metadata:
+      labels:
+        app: otelcollector
+    spec:
+      containers:
+      - name: otelcollector
+        image: otel/opentelemetry-collector:latest
+        args: ["--config=/etc/otel-collector-config.yaml"]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 4317
+          protocol: TCP
+        - containerPort: 4318
+          protocol: TCP
+        - containerPort: 8888
+          protocol: TCP
+        - containerPort: 8889
+          protocol: TCP
+        - containerPort: 13133
+          protocol: TCP
+        - containerPort: 55679
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/otel-collector-config.yaml
+          name: otelcollector
+          subPath: otel-collector-config.yaml
+      volumes:
+      - configMap:
+          name: otelcollector
+        name: otelcollector

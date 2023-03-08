@@ -4,7 +4,7 @@ Repo to explore the use of gRPC/protocol buffers and OpenTelemetry
 
 ## Running the demo
 
-### Run Jaeger <!-- , Prometheus, and the OTel collector -->
+### Run Jaeger, Prometheus, and the OTel collector
 
 For running Jaeger in docker run:
 
@@ -38,7 +38,21 @@ docker run -d --name jaeger \
   jaegertracing/all-in-one:1.41
 ```
 
-Next, run Prometheus. Use [these docs](https://prometheus.io/docs/prometheus/latest/getting_started/) to download the binary and run it locally.
+Next, run Prometheus. Use [these docs](https://prometheus.io/docs/prometheus/latest/getting_started/) to download the binary and run it locally. Your scrape config should look like this:
+
+```
+scrape_configs:
+  - job_name: "otelcollector"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["localhost:8888"]
+
+  - job_name: "otel_collected_metrics"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["localhost:8889"]
+```
+
 
 Next, run the OpenTelemetry collector:
 
