@@ -16,10 +16,33 @@ exporters:
   # Data sources: metrics
   prometheus:
     endpoint: 0.0.0.0:8889
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
 
 processors:
   batch:
     timeout: 5s
+
+  attributes:
+    actions:
+    - action: insert
+      key: event_domain
+      from_attribute: event.domain
+    - action: insert
+      key: loki.attribute.labels
+      value: event_domain
+
+  resource:
+    attributes:
+    - action: insert
+      key: service_name
+      from_attribute: service.name
+    - action: insert
+      key: service_namespace
+      from_attribute: service.namespace
+    - action: insert
+      key: loki.resource.labels
+      value: service_name, service_namespace
 
 extensions:
   health_check:
@@ -42,3 +65,7 @@ service:
       receivers: [otlp]
       processors: [batch]
       exporters: [logging,prometheus]
+    logs:
+      receivers: [otlp]
+      processors: [resource, attributes]
+      exporters: [logging, loki]

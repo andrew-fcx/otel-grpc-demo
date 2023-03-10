@@ -14,3 +14,5 @@ You can specify the bound of the random number generation and the duration betwe
 ```
 opentelemetry-instrument --service_name grpc-client-py python app.py --min=10 --max=20 --sleep=5
 ```
+
+[Example for setting up logging](https://github.com/open-telemetry/opentelemetry-python/blob/main/docs/examples/logs/example.py)
