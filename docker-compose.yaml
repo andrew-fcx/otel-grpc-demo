@@ -61,21 +61,32 @@ services:
       - otel-demo
 
   grpc-server-node:
-    build: ./grpc-server-node
+    build:
+      context: .
+      dockerfile: grpc-server-node.Dockerfile
     networks:
       - otel-demo
 
   grpc-client-py1:
-    build: ./grpc-client-py
+    build:
+      context: .
+      dockerfile: grpc-client-py.Dockerfile
+    environment:
+      - "SERVICE_NAME=grpc-client-py1"
     command:
-      - ""
+      - "--sleep=3"
     networks:
       - otel-demo
 
   grpc-client-py2:
-    build: ./grpc-client-py
+    build:
+      context: .
+      dockerfile: grpc-client-py.Dockerfile
+    environment:
+      - "SERVICE_NAME=grpc-client-py2"
     command:
-      - ""
+      - "--min=20"
+      - "--max=50"
     networks:
       - otel-demo
   
