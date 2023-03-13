@@ -125,6 +125,7 @@ If you want to export metrics and traces to the console instead you cane use the
 - [OpenTelemetry Node.js getting started](https://opentelemetry.io/docs/instrumentation/js/getting-started/nodejs/)
 - [Logz.io Node auto-instrumentation tutorial](https://logz.io/blog/nodejs-javascript-opentelemetry-auto-instrumentation/)
 - [Jaeger getting started](https://www.jaegertracing.io/docs/1.41/getting-started/)
+- [Loki exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/lokiexporter/README.md)
 
 
 ## Next steps
