@@ -4,7 +4,7 @@ Repo to explore the use of gRPC/protocol buffers and OpenTelemetry
 
 ## Running the demo
 
-### Run Jaeger, Prometheus, and the OTel collector
+### Run Jaeger, Prometheus, Loki, and the OTel collector
 
 For running Jaeger in docker run:
 
@@ -53,6 +53,12 @@ scrape_configs:
       - targets: ["localhost:8889"]
 ```
 
+Next run Loki and Grafana.
+
+```
+cd loki
+docker compose up
+```
 
 Next, run the OpenTelemetry collector:
 
