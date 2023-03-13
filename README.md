@@ -6,27 +6,7 @@ Repo to explore the use of gRPC/protocol buffers and OpenTelemetry
 
 ### Run Jaeger, Prometheus, Loki, and the OTel collector
 
-For running Jaeger in docker run:
-
-<!-- ```
-docker run -d --name jaeger \
-  -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
-  -e COLLECTOR_OTLP_ENABLED=true \
-  -e JAEGER_DISABLED=true \
-  -p 6831:6831/udp \
-  -p 6832:6832/udp \
-  -p 5778:5778 \
-  -p 16686:16686 \
-  -p 4317:4317 \
-  -p 4318:4318 \
-  -p 14250:14250 \
-  -p 14268:14268 \
-  -p 14269:14269 \
-  -p 9411:9411 \
-  jaegertracing/all-in-one:1.41
-```
-
-The Jaeger all-in-one binary contains everything we need to collect metrics, including the OTLP collector for the OpenTelemetry traces. We could alternatively use the OpenTelemetry collector and then publish from there to Jaeger. -->
+For running Jaeger in docker, run:
 
 ```
 docker run -d --name jaeger \
