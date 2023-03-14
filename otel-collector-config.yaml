@@ -2,22 +2,20 @@ receivers:
   otlp:
    protocols:
      http:
-       endpoint: 0.0.0.0:4318
      grpc:
-       endpoint: 0.0.0.0:4317
 
 exporters:
   logging:
     loglevel: debug
   jaeger:
-    endpoint: host.docker.internal:14250
+    endpoint: jaeger:14250
     tls:
       insecure: true
   # Data sources: metrics
   prometheus:
     endpoint: 0.0.0.0:8889
   loki:
-    endpoint: http://host.docker.internal:3100/loki/api/v1/push
+    endpoint: http://loki:3100/loki/api/v1/push
 
 processors:
   batch:
@@ -68,4 +66,4 @@ service:
     logs:
       receivers: [otlp]
       processors: [resource, attributes]
-      exporters: [logging, loki]
+      exporters: [loki]

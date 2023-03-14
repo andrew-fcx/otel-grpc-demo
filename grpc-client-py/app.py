@@ -44,13 +44,16 @@ def init_parser():
 
 
 def run(min=1, max=100, sleep_time=1):
-    with grpc.insecure_channel('localhost:50051') as channel:
-        stub = random_pb2_grpc.RandNumGenStub(channel)
+    try:
+        with grpc.insecure_channel('grpc-server-node:50051') as channel:
+            stub = random_pb2_grpc.RandNumGenStub(channel)
 
-        while True:
-            r = get_random_number(stub, min, max)
-            random_counter.add(1)
-            time.sleep(sleep_time)
+            while True:
+                r = get_random_number(stub, min, max)
+                random_counter.add(1)
+                time.sleep(sleep_time)
+    except:
+        logger.error("Could not connect to gRPC server.")
 
 
 if __name__ == "__main__":
@@ -60,4 +63,6 @@ if __name__ == "__main__":
     maxi = args.max if args.max else 100
     sleep_dir = args.sleep if args.sleep else 1
     
+    # Wait 5 seconds before trying to establish connection
+    time.sleep(5)
     run(min=mini, max=maxi, sleep_time=sleep_dir)

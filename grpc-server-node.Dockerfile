@@ -4,4 +4,5 @@ RUN chown -R node:node /app
 COPY --chown=node:node ./grpc-server-node /app/src
 COPY --chown=node:node ./pb /app/pb
 USER node
+WORKDIR /app/src
 ENTRYPOINT ["npm", "start"]
