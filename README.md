@@ -1,6 +1,6 @@
 # otel-grpc-demo
 
-Repo to explore the use of gRPC/protocol buffers and OpenTelemetry
+Repo to explore the use of gRPC/protocol buffers and OpenTelemetry. The repo consists of a simple gRPC server (Node.js app) and client (Python app). These are both instrumented with OpenTelemetry to generate traces, metrics, and logs that are received by the OpenTelemetry collector which published them to Jaeger, Prometheus, and Loki, respectively. All of this, plus Grafana, runs in Docker via `docker compose` to demonstrate OpenTelemetry's capabilities from end-to-end.
 
 ## Running the demo
 

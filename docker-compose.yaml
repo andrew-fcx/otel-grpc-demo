@@ -22,7 +22,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yaml:/etc/prometheus.yaml
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
 
   jaeger:
     image: jaegertracing/all-in-one:1.41
@@ -60,8 +60,7 @@ services:
     depends_on:
       - otelcollector
     environment:
-      - "SERVICE_NAME=grpc-client-py1"
-      - "OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcollector:4317"
+      - "OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcollector:4318"
     ports:
       - "50051:50051"
 
@@ -73,7 +72,7 @@ services:
       - otelcollector
       - grpc-server-node
     environment:
-      - "SERVICE_NAME=grpc-client-py1"
+      - "OTEL_SERVICE_NAME=grpc-client-py1"
       - "OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcollector:4317"
     command:
       - "--sleep=3"
@@ -86,7 +85,7 @@ services:
       - otelcollector
       - grpc-server-node
     environment:
-      - "SERVICE_NAME=grpc-client-py2"
+      - "OTEL_SERVICE_NAME=grpc-client-py2"
       - "OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcollector:4317"
     command:
       - "--min=20"
